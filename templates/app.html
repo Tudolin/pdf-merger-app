@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mesclagem de PDFs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Cabeçalho flutuante com estilos personalizados -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top" style="background-color: rgba(46, 139, 87, 0.8);">
+        <a class="navbar-brand" href="#">PDF Merger</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/Tudolin" target="_blank">GitHub</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://tudolin.github.io/" target="_blank">Portfólio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/in/rafael-nadalin-68166722a/" target="_blank">LinkedIn</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center mb-4">Mesclagem de PDFs</h1>
+                        <form action="/merge_pdfs" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="file">Selecione arquivos PDF que serão mesclados : </label>
+                                <input type="file" class="form-control-file" name="file" multiple required>
+                            </div>
+                            <div class="form-group">
+                                <label for "name">Nome do arquivo final :</label>
+                                <input type="text" class="form-control" name="name" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Mesclar PDFs</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center mt-4">
+        <p>&copy; 2023 Rafael Nadalin. Todos os direitos reservados.</p>
+    </footer>
+    
+    <style>
+        .bg-custom {
+            background-color: transparent;
+        }
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBGJWYOpYeqKNJAg4K8wCec-g0Nf2X89OE",
+          authDomain: "teste-estudos-4706a.firebaseapp.com",
+          databaseURL: "https://teste-estudos-4706a-default-rtdb.firebaseio.com",
+          projectId: "teste-estudos-4706a",
+          storageBucket: "teste-estudos-4706a.appspot.com",
+          messagingSenderId: "655585355209",
+          appId: "1:655585355209:web:d2d96204702fc453b0f418"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+      </script>
+</body>
+</html>
