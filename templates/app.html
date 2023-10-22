@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mesclagem de PDFs</title>
+    <title style="color: white;">Mesclagem de PDFs</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background: rgb(78, 61, 77);
+background: radial-gradient(circle, rgba(78, 61, 77, 1) 0%, rgba(0, 0, 0, 1) 76%);">
     <!-- Cabeçalho flutuante com estilos personalizados -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top" style="background-color: rgba(46, 139, 87, 0.8);">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top" style="background: rgba(0, 0, 0, 0);"> 
         <a class="navbar-brand" href="#">PDF Merger</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,13 +15,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/Tudolin" target="_blank">GitHub</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://tudolin.github.io/" target="_blank">Portfólio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://www.linkedin.com/in/rafael-nadalin-68166722a/" target="_blank">LinkedIn</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/Tudolin" target="_blank">
+                            <img src="/git-logo.png" alt="GitHub" width="60px">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://tudolin.github.io/" target="_blank">Portfólio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.linkedin.com/in/rafael-nadalin-68166722a/" target="_blank">
+                            <img src="/linkedin-logo.png" alt="LinkedIn" width="60px">
+                        </a>
+                    </li>
                 </li>
             </ul>
         </div>
@@ -30,18 +37,36 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
+                    <div style="background: rgb(78, 61, 77); color: white;" class="card-body">
                         <h1 class="text-center mb-4">Mesclagem de PDFs</h1>
                         <form action="/merge_pdfs" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="file">Selecione arquivos PDF que serão mesclados : </label>
-                                <input type="file" class="form-control-file" name="file" multiple required>
+                                <label for="file">Selecione arquivos PDF que serão mesclados:</label>
+                                <input type="file" class="btn form-control-file" name="file" multiple required>
                             </div>
                             <div class="form-group">
-                                <label for "name">Nome do arquivo final :</label>
+                                <label for="name">Nome do arquivo final:</label>
                                 <input type="text" class="form-control" name="name" required>
+                                <button id="show-popup" class="btn btn-primary btn-block" style="margin-top: 5px;" type="button">Mesclar PDF's</button>
+                                <div id="confirmation-popup" class="modal" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 style="color: black" class="modal-title">PDFs mesclados com sucesso!</h5>
+                                                <button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div style="color: black;" class="modal-body">Os PDFs foram mesclados com sucesso. O download está pronto.</div>
+                                            <div class="modal-footer">
+                                                <!-- Após o fechamento do formulário -->
+                                                <button id="download-link" class="btn btn-primary btn-block">Download</button>
+                                                <button id="confirm-button" type="button" class="btn btn-secondary" onclick="window.location.reload();">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Mesclar PDFs</button>
                         </form>
                     </div>
                 </div>
@@ -52,16 +77,29 @@
     <footer class="text-center mt-4">
         <p>&copy; 2023 Rafael Nadalin. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        document.getElementById('show-popup').addEventListener('click', function () {
+            var fileInput = document.querySelector('input[type="file"]');
+            var nameInput = document.querySelector('input[name="name"]');
+            if (fileInput.files.length > 0 && nameInput.value.trim() !== "") {
+                var confirmationPopup = document.getElementById('confirmation-popup');
+                confirmationPopup.style.display = 'block';
+            }
+        });
     
-    <style>
-        .bg-custom {
-            background-color: transparent;
-        }
-    </style>
+        document.getElementById('close-button').addEventListener('click', function () {
+            var confirmationPopup = document.getElementById('confirmation-popup');
+            confirmationPopup.style.display = 'none';
+        });
     
+        document.getElementById('confirm-button').addEventListener('click', function () {
+            // Adicione a função de envio aqui, se necessário
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
 </body>
 </html>
