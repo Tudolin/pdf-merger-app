@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 from app.pdf_merger import merge_pdfs
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MERGED_FOLDER'] = 'merged'
 
@@ -40,6 +40,10 @@ def merge_pdfs_route():
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory(app.config['MERGED_FOLDER'], filename, as_attachment=True)
+
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
 
 if __name__ == '__main__':
     app.run(debug=True)
