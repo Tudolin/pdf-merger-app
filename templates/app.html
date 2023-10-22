@@ -6,6 +6,7 @@
 </head>
 <body style="background: rgb(78, 61, 77);
 background: radial-gradient(circle, rgba(78, 61, 77, 1) 0%, rgba(0, 0, 0, 1) 76%);">
+
     <!-- Cabeçalho flutuante com estilos personalizados -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top" style="background: rgba(0, 0, 0, 0);"> 
         <a class="navbar-brand" href="#">PDF Merger</a>
@@ -43,8 +44,8 @@ background: radial-gradient(circle, rgba(78, 61, 77, 1) 0%, rgba(0, 0, 0, 1) 76%
                         <h1 class="text-center mb-4">Mesclagem de PDFs</h1>
                         <form action="/merge_pdfs" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="file">Selecione arquivos PDF que serão mesclados:</label>
-                                <input type="file" class="btn form-control-file" name="file" multiple required>
+                                <label for="file">Selecione arquivos PDF que serão mesclados (No máximo 7):</label>
+                                <input type="file" class="btn form-control-file" name="file" multiple min=2 max=6 required accept=".PDF">
                             </div>
                             <div class="form-group">
                                 <label for="name">Nome do arquivo final:</label>
@@ -76,7 +77,7 @@ background: radial-gradient(circle, rgba(78, 61, 77, 1) 0%, rgba(0, 0, 0, 1) 76%
         </div>
     </div>
 
-    <footer style="color: white;" class="text-center mt-4">
+    <footer class="text-center mt-4">
         <p>&copy; 2023 Rafael Nadalin. Todos os direitos reservados.</p>
     </footer>
 
@@ -84,9 +85,29 @@ background: radial-gradient(circle, rgba(78, 61, 77, 1) 0%, rgba(0, 0, 0, 1) 76%
         document.getElementById('show-popup').addEventListener('click', function () {
             var fileInput = document.querySelector('input[type="file"]');
             var nameInput = document.querySelector('input[name="name"]');
-            if (fileInput.files.length > 0 && nameInput.value.trim() !== "") {
-                var confirmationPopup = document.getElementById('confirmation-popup');
-                confirmationPopup.style.display = 'block';
+            var selectedFiles = fileInput.files;
+    
+            // Verifique se o número de arquivos está dentro dos limites
+            if (selectedFiles.length >= 2 && selectedFiles.length <= 7 && nameInput.value.trim() !== "") {
+                var nonPdfFiles = false;
+    
+                // Verifique se cada arquivo tem a extensão .pdf
+                for (var i = 0; i < selectedFiles.length; i++) {
+                    var fileName = selectedFiles[i].name;
+                    if (!fileName.toLowerCase().endsWith(".pdf")) {
+                        nonPdfFiles = true;
+                        break;
+                    }
+                }
+    
+                if (nonPdfFiles) {
+                    alert("Por favor, selecione apenas arquivos PDF.");
+                } else {
+                    var confirmationPopup = document.getElementById('confirmation-popup');
+                    confirmationPopup.style.display = 'block';
+                }
+            } else {
+                alert("Por favor, selecione de 2 a 7 arquivos PDF e preencha o nome do arquivo final.");
             }
         });
     
